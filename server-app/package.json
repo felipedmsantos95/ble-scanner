@@ -1,0 +1,34 @@
+{
+  "name": "server-app",
+  "version": "1.0.0",
+  "description": "server app to register BLE devices infos",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/felipedmsantos95/libreacon.git"
+  },
+  "author": "Felipe Santos / Geovana Amaral / Valney Junior",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/felipedmsantos95/libreacon/issues"
+  },
+  "homepage": "https://github.com/felipedmsantos95/libreacon#readme",
+  "dependencies": {
+    "bluetooth-scanner": "^1.0.1",
+    "body-parser": "^1.18.3",
+    "cors": "^2.8.5",
+    "express": "^4.16.4",
+    "http": "0.0.0",
+    "net": "^1.0.2",
+    "node-bluetooth": "^1.2.5",
+    "require-dir": "^1.2.0",
+    "socket.io": "^2.2.0"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.10"
+  }
+}
