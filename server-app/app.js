@@ -20,23 +20,20 @@ const http = require('http').Server(app);
 const net = require('net');
 const io = require('socket.io')(http);
 
-// device.listPairedDevices(console.log);
+var noble = require('noble');
 
-// device
-// .on('finished',  console.log.bind(console, 'finished'))
-// .on('found', function found(address, name){
-//   console.log('Found: ' + address + ' with name ' + name);
-// }).scan();
+noble.on('stateChange', function(state) {
+  if (state === 'poweredOn') {
+    noble.startScanning();
+  } else {
+    noble.stopScanning();
+  }
+});
 
-
-Scanner = require("bluetooth-scanner");
-
-
-var device = "hci0";
-
-
-bleScanner = new Scanner(device, function(mac, name) {
-    console.log('Found device: ' + name);
+noble.on('discover', function(peripheral) {
+    console.log('Found device with local name: ' + peripheral.advertisement.localName);
+    console.log('advertising the following service uuid\'s: ' + peripheral.advertisement.serviceUuids);
+    console.log();
 });
 
 
