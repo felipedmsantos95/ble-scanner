@@ -38,34 +38,15 @@ var cont = 0;
 
 
 noble.on('discover', function (peripheral) {
-    console.log('peripheral discovered (' + peripheral.id +
-              ' with address <' + peripheral.address +  ', ' + peripheral.addressType + '>,' +
-              ' connectable ' + peripheral.connectable + ',' +
-              ' RSSI ' + peripheral.rssi + ':');
-	  console.log('\thello my local name is:');
-	  console.log('\t\t' + peripheral.advertisement.localName);
 
-	  if(peripheral.advertisement.localName != null)
-	  	io.emit('bleList', peripheral.advertisement.localName);
+	let bleObj = {
+		localName: peripheral.advertisement.localName,
+		id: peripheral.id,
+		address: peripheral.address
+	}
 
-	  
-	  console.log('\tcan I interest you in any of the following advertised services:');
-	  console.log('\t\t' + JSON.stringify(peripheral.advertisement.serviceUuids));
-
-	  var serviceData = peripheral.advertisement.serviceData;
-	  if (serviceData && serviceData.length) {
-	    console.log('\there is my service data:');
-	    for (var i in serviceData) {
-	      console.log('\t\t' + JSON.stringify(serviceData[i].uuid) + ': ' + JSON.stringify(serviceData[i].data.toString('hex')));
-	    }
-	  }
-	  if (peripheral.advertisement.manufacturerData) {
-	    console.log('\there is my manufacturer data:');
-	    console.log('\t\t' + JSON.stringify(peripheral.advertisement.manufacturerData.toString('hex')));
-	  }
-	  if (peripheral.advertisement.txPowerLevel !== undefined) {
-	    console.log('\tmy TX power level is:');
-	    console.log('\t\t' + peripheral.advertisement.txPowerLevel);
+	if(peripheral.advertisement.localName != null){
+	  	io.emit('bleList', bleObj);
 	}
 
 
@@ -73,7 +54,35 @@ noble.on('discover', function (peripheral) {
 })
 
 
-//setTimeout(, 2000);
+//Recieve front-end data
+
+io.on('connection', function(socket){
+
+	socket.on('refresh', function(data){
+
+		if(data) {
+			console.log('aqui');
+			 noble.stopScanning();
+			 noble.startScanning();
+
+		}	
+
+	});
+})
+
+// var count = 0; 
+// var intervalObject = setInterval(function () { 
+//         count++; 
+//         console.log(count, 'seconds passed'); 
+//         if (count == 20) { 
+//             console.log('exiting'); 
+//             clearInterval(intervalObject); 
+//         } 
+//     }, 1000); 
+
+// console.log('sai do loop');
+
+
 
 
 app.get('/', function(req, res){

@@ -1,0 +1,29 @@
+
+
+
+#bleTable tr td{
+  
+  width: 100%;
+  cursor: pointer; /**importante para não mostrar cursor de texto**/
+}
+
+#bleTable tr td:last-child{
+  text-align: center;
+}
+
+/**Cores**/
+#bleTable tr:nth-child(odd){
+  background-color: #eee;
+}
+
+/**Cor quando passar por cima**/
+#bleTable tr:hover td{
+  
+}
+
+/**Cor quando selecionado**/
+#bleTable tr.selecionado td{
+  background-color: #aff7ff;
+  width: 100%;
+}
+
